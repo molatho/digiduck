@@ -34,6 +34,15 @@ optional arguments:
                         Delay (in ms) between blinks.
 ```
 
+You can supply your own, custom sketch template. Ideally, it should include the following placeholders (which compatible types):
+* `%payloadlen%` (uint32_t)
+* `%payload%` (uint8_t[])
+* `%loops%` (uint32_t)
+* `%loopdelay%` (uint32_t)
+* `%initialdelay%` (uint32_t)
+* `%blink%` (bool)
+* `%blinkdelay%` (uint32_t)
+
 ## Credits
 * Script encoder based on [DuckToolKit](https://github.com/Audition-CSBlock/DuckToolkit/commit/79954821f3c9e0f4985d2f43b838049423849851)
     * Due to the inactivity of the DuckToolKit project I copied over its content and fixed it where necessary.

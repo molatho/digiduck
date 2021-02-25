@@ -7,10 +7,10 @@
 const uint32_t PAYLOAD_LEN = %payload_len%;
 const PROGMEM uint8_t PAYLOAD[PAYLOAD_LEN] = { %payload% };
 const uint32_t LOOPS = %loops%; //Count of code-executions
-const uint32_t LOOP_DELAY = %loop_delay%; //Delay between code-executions
-const uint32_t INITIAL_DELAY = %initial_delay%; //Initial delay for device-initialization
+const uint32_t LOOP_DELAY = %loopdelay%; //Delay between code-executions
+const uint32_t INITIAL_DELAY = %initialdelay%; //Initial delay for device-initialization
 const bool BLINK = %blink%; //Blink when finished?
-const uint32_t BLINK_DELAY = %blink_delay%; //Delay between blinks
+const uint32_t BLINK_DELAY = %blinkdelay%; //Delay between blinks
 
 /* Runtime variables */
 uint32_t loops = LOOPS;

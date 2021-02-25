@@ -87,7 +87,7 @@ def main():
     template = open(templatefile, "r").read()
 
     with open(args.ofile, 'w') as f:
-        f.write(Generator.process(bin, template, args.loops, args.loopdelay, args.initialdelay, args.blink, args.blinkdelay))
+        f.write(Generator.process(bin, template, args))
 
     print("Done!")
     return

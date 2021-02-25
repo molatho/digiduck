@@ -5,18 +5,18 @@ class Generator:
     @staticmethod
     def process(code: bytes, template: str,
                 loops=1,
-                loop_delay=2000,
-                initial_delay=5000,
+                loopdelay=2000,
+                initialdelay=5000,
                 blink=True,
-                blink_delay=500) -> str:
+                blinkdelay=500) -> str:
         sketch = template
 
         args = {
             "loops": loops,
-            "loop_delay": loop_delay,
-            "initial_delay": initial_delay,
+            "loopdelay": loopdelay,
+            "initialdelay": initialdelay,
             "blink": blink,
-            "blink_delay": blink_delay
+            "blinkdelay": blinkdelay
         }
 
         for k, v in args.items():
