@@ -1,0 +1,54 @@
+/*
+    %META%
+*/
+
+#include <DigiKeyboard.h>
+/* Constants, filled by digiduck */
+const uint32_t PAYLOAD_LEN = %payload_len%;
+const PROGMEM uint8_t PAYLOAD[PAYLOAD_LEN] = { %payload% };
+const uint32_t LOOPS = %loops%; //Count of code-executions
+const uint32_t LOOP_DELAY = %loop_delay%; //Delay between code-executions
+const uint32_t INITIAL_DELAY = %initial_delay%; //Initial delay for device-initialization
+const bool BLINK = %blink%; //Blink when finished?
+const uint32_t BLINK_DELAY = %blink_delay%; //Delay between blinks
+
+/* Runtime variables */
+uint32_t loops = LOOPS;
+union Instruction_t {
+    uint16_t raw;
+    struct KeyData_t {
+        uint8_t key;
+        uint8_t mod;  
+    } keyData;
+} instruction;
+
+/* Initial setup */
+void setup() {
+    if (BLINK) {
+        pinMode(0, OUTPUT); //LED on Model B
+        pinMode(1, OUTPUT); //LED on Model A
+    }
+    DigiKeyboard.delay(INITIAL_DELAY);
+}
+
+void loop() {
+    if (loops > 0) {
+        /* Execute payload */
+        for (uint32_t i = 0; i < PAYLOAD_LEN; i += 2) {
+            instruction.raw = pgm_read_word_near(PAYLOAD + i);
+            if (instruction.keyData.key == 0)
+                DigiKeyboard.delay(instruction.keyData.mod);
+            else
+                DigiKeyboard.sendKeyStroke(instruction.keyData.key, instruction.keyData.mod);
+        }
+        loops--;
+        DigiKeyboard.delay(LOOP_DELAY);
+    } else if (BLINK) {
+        digitalWrite(0, HIGH);
+        digitalWrite(1, HIGH);
+        delay(BLINK_DELAY / 2);
+        digitalWrite(0, LOW);
+        digitalWrite(1, LOW);
+        delay(BLINK_DELAY / 2);
+    }
+}
